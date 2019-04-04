@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Cipher {
-	//ask user for string, ask for shift
+	//When doing modular division, 
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
