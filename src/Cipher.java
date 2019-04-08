@@ -13,14 +13,22 @@ public class Cipher {
 			char letter = str.charAt(i);
 			int number = letter - 'a';
 			number = (number - 3) % 26;
-			letter = (char) number;
+			if (number == -3)
+			{
+				number +=  ;
+			}
+			else if (number == -2)
+			{
+				number +=4 ;
+			}
+			else if (number == -1)
+			{
+				number += 3;
+			}
+			letter = (char) (number + 'a');
 			newStr += letter;
 		}
 		System.out.println(newStr);
-		//char letter = 'c';
-		//int number = letter - 'a';
-		//number = (number + 7) % 26;
-		//System.out.println((char) (number + 'a'));
 		
 		//System.out.println(letter);
 		//int number = letter -'a';
