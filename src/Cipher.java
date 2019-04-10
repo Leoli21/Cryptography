@@ -13,16 +13,21 @@ public class Cipher {
 		System.out.println("Please input file name: ");
 		String name = input.nextLine();
 		
-		//String filepath= "C:\\Users\\leoli\\git\\Cryptography\\src\\";
+		//String filePath = "C:\Users\lli21\Documents\Cryptography\src";
+		
+		
 		//Read contents of the file
 		File myFile = new File(name);
 		Scanner inputFile = new Scanner(myFile);
 		
-		//Write to file
-		FileWriter fileWriter = new FileWriter("xx_ENC.txt");
+		//Write to new file
+		FileWriter fileWriter = new FileWriter("C:\\Users\\lli21\\Documents\\Cryptography\\src\\myFile_ENC.txt");
 	    PrintWriter printWriter = new PrintWriter(fileWriter);
 		//printWriter.print("String");
-	    String newStr="";
+	    
+	    String newStr = "";
+	    
+	    //Encrypt file and store into new file
 		while (inputFile.hasNext())
 		{
 			String str = inputFile.nextLine();
@@ -54,6 +59,7 @@ public class Cipher {
 		}
 
 	}
+	
 	private static boolean isLower(char c)
 	{
 		return c >= 'a' && c <= 'z';
