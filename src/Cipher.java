@@ -21,7 +21,7 @@ public class Cipher {
 		Scanner inputFile = new Scanner(myFile);
 		
 		//Write to new file
-		FileWriter fileWriter = new FileWriter("C:\\Users\\lli21\\Documents\\Cryptography\\src\\myFile_ENC.txt");
+		FileWriter fileWriter = new FileWriter("C:\\Users\\lli21\\Documents\\Cryptography\\myFile_ENC.txt");
 	    PrintWriter printWriter = new PrintWriter(fileWriter);
 		//printWriter.print("String");
 	    
@@ -53,6 +53,7 @@ public class Cipher {
 			}
 		}
 		printWriter.print(newStr);
+		System.out.println(newStr);
 		printWriter.close();
 		
 		
@@ -90,6 +91,7 @@ public class Cipher {
 		newStr += letter;
 		return newStr;
 	}
+	
 }
 
 
