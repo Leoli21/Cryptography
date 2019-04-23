@@ -14,8 +14,6 @@ public class Cipher {
 		String name = input.nextLine();
 		
 		//String filePath = "C:\Users\lli21\Documents\Cryptography\src";
-		
-		
 		//Read contents of the file
 		File myFile = new File(name);
 		Scanner inputFile = new Scanner(myFile);
@@ -23,8 +21,7 @@ public class Cipher {
 		//Write to new file
 		FileWriter fileWriter = new FileWriter("C:\\Users\\lli21\\Documents\\Cryptography\\myFile_ENC.txt");
 	    PrintWriter printWriter = new PrintWriter(fileWriter);
-		//printWriter.print("String");
-	    
+	   
 	    String newStr = "";
 	    
 	    //Encrypt file and store into new file
@@ -35,30 +32,24 @@ public class Cipher {
 			for(int i = 0; i < str.length(); i++)
 			{
 				char letter = str.charAt(i);
-				if (letter == ' ' || letter == ',' || letter == '.' || letter == '"' || letter == '-')
+				if (isLower(letter))
+				{
+					newStr = lowerCaseEncryptor(newStr, letter);
+				}
+				else if (isUpper(letter))
+				{
+					newStr = upperCaseEncryptor(newStr, letter);
+				}
+				else
 				{
 					letter = str.charAt(i);
 					newStr += letter;
 				}
-				else
-				{
-					if (isLower(letter))
-					{
-						newStr = lowerCaseEncryptor(newStr, letter);
-					}
-					else if (isUpper(letter))
-					{
-						newStr = upperCaseEncryptor(newStr, letter);
-					}
 			}
 		}
 		printWriter.print(newStr);
 		System.out.println(newStr);
-		printWriter.close();
-		
-		
-		}
-
+		printWriter.close();	
 	}
 	
 	private static boolean isLower(char c)
