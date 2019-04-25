@@ -17,10 +17,11 @@ public class Cipher {
 		//Read contents of the file
 		File myFile = new File(name);
 		Scanner inputFile = new Scanner(myFile);
-		
+
 		//Write to new file
-		FileWriter fileWriter = new FileWriter("C:\\Users\\lli21\\Documents\\Cryptography\\myFile_ENC.txt");
-	    PrintWriter printWriter = new PrintWriter(fileWriter);
+		int locate = name.indexOf(".");
+		String fileName = name.substring(0, locate);
+	    PrintWriter printWriter = new PrintWriter(fileName + "_ENC.txt");
 	   
 	    String newStr = "";
 	    
@@ -48,7 +49,7 @@ public class Cipher {
 			}
 		}
 		printWriter.print(newStr);
-		System.out.println(newStr);
+		System.out.println("New String in encryped file: " + newStr);
 		printWriter.close();	
 	}
 	
