@@ -18,9 +18,9 @@ public class DecryptEncrypt {
 		File myFile = new File(name);
 		Scanner inputFile = new Scanner(myFile);
 		
-	
-		FileWriter fileWriter = new FileWriter("C:\\Users\\lli21\\Documents\\Cryptography\\myFile_ENC.txt");
-	    PrintWriter printWriter = new PrintWriter(fileWriter);
+		int locate = name.indexOf(".");
+		String fileName = name.substring(0, locate);
+	    PrintWriter printWriter = new PrintWriter(fileName + "_ENC.txt");
 	    
 	    
 		//caesar_cipher(myFile, encrypt or decrypt, shiftAmount);
