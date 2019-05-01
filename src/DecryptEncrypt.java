@@ -15,20 +15,33 @@ public class DecryptEncrypt {
 		System.out.println("How many places should the alphabet be shifted? ");
 		int shift = input.nextInt();
 		
-		File myFile = new File(name);
-		Scanner inputFile = new Scanner(myFile);
+		boolean encrypt = true;
+		System.out.println("Encrypt or Decrypt?");
+		String answer = input.next();
+		if (answer.equals("Encrypt"))
+		{
+			encrypt = true;
+		}
+		else if (answer.equals("Decrypt"))
+		{
+			encrypt = false;
+		}
 		
-		//caesar_cipher(name, encrypt or decrypt (boolean) , shift);
+		int locate = name.indexOf(".");
+		String newName = name.substring(0, locate);
+	    PrintWriter printWriter = new PrintWriter(name + "_ENC.txt");
+	    
+		String newStr = caesar_cipher(name, encrypt, shift);
+		
+		printWriter.print(newStr);
+		System.out.println("New String in encryped/decrypted file: " + newStr);
+		printWriter.close();
 
 	}
 	public static String caesar_cipher(String fileName, boolean encrypt, int shiftAmount) throws IOException
 	{
 		File myFile = new File(fileName);
 		Scanner inputFile = new Scanner(myFile);
-		
-		int locate = fileName.indexOf(".");
-		String name = fileName.substring(0, locate);
-	    PrintWriter printWriter = new PrintWriter(fileName + "_ENC.txt");
 	    
 	    String newStr = "";
 	    
@@ -37,7 +50,6 @@ public class DecryptEncrypt {
 	    	String str = inputFile.nextLine();
 	    	if (encrypt) //negative, shifting down (encrypting)
 			{
-				shiftAmount *= -1;
 				for(int i = 0; i < str.length(); i++)
 				{
 					char letter = str.charAt(i);
@@ -58,7 +70,7 @@ public class DecryptEncrypt {
 			}
 	    	else  //positive, shifting forwards (decrypting)
 			{
-				shiftAmount *= 1;
+				shiftAmount *= -1;
 				for(int i = 0; i < str.length(); i++)
 				{
 					char letter = str.charAt(i);
@@ -77,10 +89,7 @@ public class DecryptEncrypt {
 					}
 				}
 			}
-	    }
-		printWriter.print(newStr);
-		System.out.println("New String in encryped/decrypted file: " + newStr);
-		printWriter.close();	
+	    }	
 		return newStr;
 	}
 	private static boolean isLower(char c)
@@ -93,8 +102,8 @@ public class DecryptEncrypt {
 	}
 	private static String upperCaseEncryptor(String newStr, char letter, int shiftAmount) {
 		int number = letter - 'A';
-		number = (number - shiftAmount) % 26;
-		if (number <= 1)
+		number = (number + shiftAmount) % 26;
+		if (number < 0)
 		{
 			number += 26;
 		}
@@ -104,8 +113,8 @@ public class DecryptEncrypt {
 	}
 	private static String lowerCaseEncryptor(String newStr, char letter, int shiftAmount) {
 		int number = letter - 'a';
-		number = (number - shiftAmount) % 26;
-		if (number < 1)
+		number = (number + shiftAmount) % 26;
+		if (number < 0)
 		{
 			number += 26;
 		}
@@ -114,24 +123,24 @@ public class DecryptEncrypt {
 		return newStr;
 	}
 	private static String upperCaseDecryptor(String newStr, char letter, int shiftAmount) {
-		int number = letter + 'A';
+		int number = letter - 'A';
 		number = (number - shiftAmount) % 26;
 		if (number > 26)
 		{
 			number -= 26;
 		}
-		letter = (char) (number - 'A');
+		letter = (char) (number + 'A');
 		newStr += letter;
 		return newStr;
 	}
 	private static String lowerCaseDecryptor(String newStr, char letter, int shiftAmount) {
-		int number = letter + 'a';
+		int number = letter - 'a';
 		number = (number - shiftAmount) % 26;
 		if (number > 26)
 		{
 			number -= 26;
 		}
-		letter = (char) (number - 'a');
+		letter = (char) (number + 'a');
 		newStr += letter;
 		return newStr;
 	}
