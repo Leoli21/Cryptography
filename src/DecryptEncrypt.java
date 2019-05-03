@@ -102,7 +102,7 @@ public class DecryptEncrypt {
 	}
 	private static String upperCaseEncryptor(String newStr, char letter, int shiftAmount) {
 		int number = letter - 'A';
-		number = (number + shiftAmount) % 26;
+		number = (number - shiftAmount) % 26;
 		if (number < 0)
 		{
 			number += 26;
@@ -113,7 +113,7 @@ public class DecryptEncrypt {
 	}
 	private static String lowerCaseEncryptor(String newStr, char letter, int shiftAmount) {
 		int number = letter - 'a';
-		number = (number + shiftAmount) % 26;
+		number = (number - shiftAmount) % 26;
 		if (number < 0)
 		{
 			number += 26;
