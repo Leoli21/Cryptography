@@ -1,43 +1,25 @@
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class DecryptEncrypt {
+public class Part_III {
 
-	public static void main(String[] args) throws IOException
-	{
-		Scanner input = new Scanner(System.in);
+	public static void main(String[] args) {
+		Scanner input = new Scanner (System.in);
+		
 		System.out.println("Enter file name: ");
 		String name = input.nextLine();
 		
-		System.out.println("How many places should the alphabet be shifted? ");
-		int shift = input.nextInt();
 		
-		boolean encrypt = true;
-		System.out.println("Encrypt or Decrypt?");
-		String answer = input.next();
-		if (answer.equals("Encrypt"))
-		{
-			encrypt = true;
-		}
-		else if (answer.equals("Decrypt"))
-		{
-			encrypt = false;
-		}
+		System.out.println("Would you like to encrypt, decrypt, or crack a file? ");
+		String answer = input.nextLine();
 		
-		int locate = name.indexOf(".");
-		String newName = name.substring(0, locate);
-	    PrintWriter printWriter = new PrintWriter(newName + "_ENC.txt");
-	    
-		String newStr = caesar_cipher(name, encrypt, shift);
-		
-		printWriter.print(newStr);
-		System.out.println("New String in encryped/decrypted file: " + newStr);
-		printWriter.close();
 
 	}
+
+	
+	
+	
 	public static String caesar_cipher(String fileName, boolean encrypt, int shiftAmount) throws IOException
 	{
 		File myFile = new File(fileName);
@@ -144,4 +126,5 @@ public class DecryptEncrypt {
 		newStr += letter;
 		return newStr;
 	}
+}
 }

@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * 
+ * @author Leo Li
+ *    Cryptography Part 1
+ */
 public class Cipher {
 
 	public static void main(String[] args) throws IOException {
