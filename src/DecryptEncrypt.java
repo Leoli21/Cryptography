@@ -34,7 +34,7 @@ public class DecryptEncrypt {
 		String newStr = caesar_cipher(name, encrypt, shift);
 		
 		printWriter.print(newStr);
-		System.out.println("New String in encryped/decrypted file: " + newStr);
+		System.out.println("New String in encrypted/decrypted file: " + newStr);
 		printWriter.close();
 
 	}

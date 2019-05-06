@@ -1,19 +1,67 @@
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Part_III {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Scanner input = new Scanner (System.in);
 		
 		System.out.println("Enter file name: ");
 		String name = input.nextLine();
 		
+		int shift = 0;
 		
+		int locate = name.indexOf(".");
+		String newName = name.substring(0, locate);
+	    PrintWriter printWriter = new PrintWriter(newName + "_ENC.txt");
+		
+		
+			
+		boolean encrypt = true;
 		System.out.println("Would you like to encrypt, decrypt, or crack a file? ");
 		String answer = input.nextLine();
+		if (answer.equals("Encrypt") || answer.equals("encrypt"))
+		{
+			encrypt = true;
+			System.out.println("How many places should the alphabet be shifted? ");
+			shift = input.nextInt();
+		}
+		else if (answer.equals("Decrypt") || answer.equals("decrypt"))
+		{
+			encrypt = false;
+			System.out.println("How many places should the alphabet be shifted? ");
+			shift = input.nextInt();
+		}
+		else if (answer.equals("Crack") || answer.equals("crack"))
+		{
+			encrypt = false;
+			
+			String first100Letters;
+
+			for (int i =0; i < 26; i++)
+			{
+				String fileStr = caesar_cipher(name, encrypt, i);
+				first100Letters = fileStr.substring(0, 100);
+				System.out.println(first100Letters);
+				System.out.println("Does this look right? ");
+				String answer2 = input.nextLine();
+				if (answer2.equals("Yes") || answer2.equals("yes"))
+				{
+					printWriter.print(fileStr);
+					System.out.println("New String in encrypted/decrypted file: " + fileStr);
+					printWriter.close();
+				}
+			}
+		}	
 		
+	    
+		String newStr = caesar_cipher(name, encrypt, shift);
+		
+		printWriter.print(newStr);
+		System.out.println("New String in encrypted/decrypted file: " + newStr);
+		printWriter.close();
 
 	}
 
@@ -127,4 +175,4 @@ public class Part_III {
 		return newStr;
 	}
 }
-}
+
