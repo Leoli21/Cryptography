@@ -27,12 +27,22 @@ public class Part_III {
 			encrypt = true;
 			System.out.println("How many places should the alphabet be shifted? ");
 			shift = input.nextInt();
+			String newStr = caesar_cipher(name, encrypt, shift);
+			
+			printWriter.print(newStr);
+			System.out.println("New String in encrypted/decrypted file: " + newStr);
+			printWriter.close();
 		}
 		else if (answer.equals("Decrypt") || answer.equals("decrypt"))
 		{
 			encrypt = false;
 			System.out.println("How many places should the alphabet be shifted? ");
 			shift = input.nextInt();
+			String newStr = caesar_cipher(name, encrypt, shift);
+			
+			printWriter.print(newStr);
+			System.out.println("New String in encrypted/decrypted file: " + newStr);
+			printWriter.close();
 		}
 		else if (answer.equals("Crack") || answer.equals("crack"))
 		{
@@ -42,26 +52,20 @@ public class Part_III {
 
 			for (int i =0; i < 26; i++)
 			{
-				String fileStr = caesar_cipher(name, encrypt, i);
+				String fileStr = caesar_cipher(name, encrypt, 19);
 				first100Letters = fileStr.substring(0, 100);
 				System.out.println(first100Letters);
 				System.out.println("Does this look right? ");
 				String answer2 = input.nextLine();
 				if (answer2.equals("Yes") || answer2.equals("yes"))
 				{
+					i = 26;
 					printWriter.print(fileStr);
 					System.out.println("New String in encrypted/decrypted file: " + fileStr);
 					printWriter.close();
 				}
 			}
 		}	
-		
-	    
-		String newStr = caesar_cipher(name, encrypt, shift);
-		
-		printWriter.print(newStr);
-		System.out.println("New String in encrypted/decrypted file: " + newStr);
-		printWriter.close();
 
 	}
 
