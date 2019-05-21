@@ -60,7 +60,17 @@ public class Part_III {
 				if (answer2.equals("Yes") || answer2.equals("yes"))
 				{
 					i = 26;
-					printWriter.print(fileStr);
+					for (int j = 0; j < fileStr.length(); j++)
+					{
+						char spaces = fileStr.charAt(j);
+						String space = Character.toString(spaces);
+						printWriter.print(fileStr.charAt(j));
+						if(space.equals("\n"))
+						{
+							printWriter.println();
+						}
+						
+					}
 					System.out.println("New String in encrypted/decrypted file: " + fileStr);
 					printWriter.close();
 				}
