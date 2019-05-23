@@ -28,9 +28,18 @@ public class Part_III {
 			System.out.println("How many places should the alphabet be shifted? ");
 			shift = input.nextInt();
 			String newStr = caesar_cipher(name, encrypt, shift);
-			
+			for (int i = 0; i < newStr.length(); i++)
+			{
+				printWriter.print(newStr.charAt(i));
+				if (newStr.charAt(i)))
+				{
+					
+				}
+			}
+			//use for loop to print each character one at a time
+			//use if statement for '\n' and use empty println()
 			printWriter.print(newStr);
-			System.out.println("New String in encrypted/decrypted file: " + newStr);
+			System.out.println("New String in encrypted file: " + newStr);
 			printWriter.close();
 		}
 		else if (answer.equals("Decrypt") || answer.equals("decrypt"))
@@ -41,7 +50,7 @@ public class Part_III {
 			String newStr = caesar_cipher(name, encrypt, shift);
 			
 			printWriter.print(newStr);
-			System.out.println("New String in encrypted/decrypted file: " + newStr);
+			System.out.println("New String in decrypted file: " + newStr);
 			printWriter.close();
 		}
 		else if (answer.equals("Crack") || answer.equals("crack"))
@@ -50,7 +59,7 @@ public class Part_III {
 			
 			String first100Letters;
 
-			for (int i =0; i < 26; i++)
+			for (int i = 1; i < 26; i++)
 			{
 				String fileStr = caesar_cipher(name, encrypt, i);
 				first100Letters = fileStr.substring(0, 100);
@@ -60,26 +69,14 @@ public class Part_III {
 				if (answer2.equals("Yes") || answer2.equals("yes"))
 				{
 					i = 26;
-					for (int j = 0; j < fileStr.length(); j++)
-					{
-						char spaces = fileStr.charAt(j);
-						String space = Character.toString(spaces);
-						printWriter.print(fileStr.charAt(j));
-						if(space.equals("\n"))
-						{
-							printWriter.println();
-						}
-						
-					}
-					System.out.println("New String in encrypted/decrypted file: " + fileStr);
+					printWriter.print(fileStr);
+					System.out.println("New String in decrypted file: " + fileStr);
 					printWriter.close();
 				}
 			}
 		}	
 
 	}
-
-	
 	
 	
 	public static String caesar_cipher(String fileName, boolean encrypt, int shiftAmount) throws IOException
@@ -91,7 +88,7 @@ public class Part_III {
 	    
 	    while (inputFile.hasNext())
 	    {
-	    	String str = inputFile.nextLine();
+	    	String str = inputFile.nextLine() + "\n";
 	    	if (encrypt) //encrypting
 			{
 				for(int i = 0; i < str.length(); i++)
