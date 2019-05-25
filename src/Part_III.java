@@ -11,7 +11,7 @@ public class Part_III {
 		System.out.println("Enter file name: ");
 		String name = input.nextLine();
 		
-		int shift = 0;
+		int shift;
 		
 		int locate = name.indexOf(".");
 		String newName = name.substring(0, locate);
@@ -28,18 +28,16 @@ public class Part_III {
 			System.out.println("How many places should the alphabet be shifted? ");
 			shift = input.nextInt();
 			String newStr = caesar_cipher(name, encrypt, shift);
-			for (int i = 0; i < newStr.length(); i++)
+			for (int i = 0; i < newStr.length(); i ++)
 			{
-				printWriter.print(newStr.charAt(i));
-				if (newStr.charAt(i)))
+				String spaceString = Character.toString(newStr.charAt(i));
+				if (spaceString.equals("\n"))
 				{
-					
+					printWriter.println();
 				}
+				printWriter.print(newStr.charAt(i));
 			}
-			//use for loop to print each character one at a time
-			//use if statement for '\n' and use empty println()
-			printWriter.print(newStr);
-			System.out.println("New String in encrypted file: " + newStr);
+			System.out.println("New String in encrypted/decrypted file: " + newStr);
 			printWriter.close();
 		}
 		else if (answer.equals("Decrypt") || answer.equals("decrypt"))
@@ -48,9 +46,16 @@ public class Part_III {
 			System.out.println("How many places should the alphabet be shifted? ");
 			shift = input.nextInt();
 			String newStr = caesar_cipher(name, encrypt, shift);
-			
-			printWriter.print(newStr);
-			System.out.println("New String in decrypted file: " + newStr);
+			for (int i = 0; i < newStr.length(); i ++)
+			{
+				String spaceString = Character.toString(newStr.charAt(i));
+				if (spaceString.equals("\n"))
+				{
+					printWriter.println();
+				}
+				printWriter.print(newStr.charAt(i));
+			}
+			System.out.println("New String in encrypted/decrypted file: " + newStr);
 			printWriter.close();
 		}
 		else if (answer.equals("Crack") || answer.equals("crack"))
@@ -59,24 +64,34 @@ public class Part_III {
 			
 			String first100Letters;
 
-			for (int i = 1; i < 26; i++)
+			for (int i =0; i < 26; i++)
 			{
-				String fileStr = caesar_cipher(name, encrypt, i);
-				first100Letters = fileStr.substring(0, 100);
+				String newStr = caesar_cipher(name, encrypt, 19);
+				first100Letters = newStr.substring(0, 100);
 				System.out.println(first100Letters);
 				System.out.println("Does this look right? ");
 				String answer2 = input.nextLine();
 				if (answer2.equals("Yes") || answer2.equals("yes"))
 				{
 					i = 26;
-					printWriter.print(fileStr);
-					System.out.println("New String in decrypted file: " + fileStr);
+					for (int j = 0; j < newStr.length(); j++)
+					{
+						String spaceString = Character.toString(newStr.charAt(j));	
+						if(spaceString.equals("\n"))
+						{
+							printWriter.println();
+						}
+						printWriter.print(newStr.charAt(j));						
+					}
+					System.out.println("New String in encrypted/decrypted file: " + newStr);
 					printWriter.close();
 				}
 			}
-		}	
+		}
 
 	}
+
+	
 	
 	
 	public static String caesar_cipher(String fileName, boolean encrypt, int shiftAmount) throws IOException
@@ -88,7 +103,7 @@ public class Part_III {
 	    
 	    while (inputFile.hasNext())
 	    {
-	    	String str = inputFile.nextLine() + "\n";
+	    	String str = inputFile.nextLine();
 	    	if (encrypt) //encrypting
 			{
 				for(int i = 0; i < str.length(); i++)
@@ -114,7 +129,7 @@ public class Part_III {
 				shiftAmount *= -1;
 				for(int i = 0; i < str.length(); i++)
 				{
-					char letter = str.charAt(i);
+					char letter = str.charAt(i);	
 					if (isLower(letter))
 					{
 						newStr = lowerCaseDecryptor(newStr, letter, shiftAmount);
