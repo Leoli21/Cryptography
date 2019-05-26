@@ -50,7 +50,7 @@ public class Part_III {
 
 			for (int i = 0; i < 26; i++)
 			{
-				String newStr = caesar_cipher(name, encrypt, 19);
+				String newStr = caesar_cipher(name, encrypt, i);
 				first100Letters = newStr.substring(0, 100);
 				System.out.println(first100Letters);
 				System.out.println("Does this look right? ");
