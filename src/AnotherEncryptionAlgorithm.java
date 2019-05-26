@@ -32,10 +32,10 @@ public class AnotherEncryptionAlgorithm {
 		return perm;
 	}
 	
-	//
-	private static void MainFunction( Scanner input, String name,  String answer)
-			throws FileNotFoundException, IOException {
-		 
+	//Encrypt, Decrypt, or Crack a File 
+	private static void MainFunction(Scanner input, String name, String answer)
+			throws FileNotFoundException, IOException 
+	{	 
 		if(answer.equalsIgnoreCase("encrypt"))
 	    {
 	    	
@@ -50,63 +50,8 @@ public class AnotherEncryptionAlgorithm {
 	    	crack(input, name);
 		}
 	}
-
-	private static void crack(Scanner input, String name) throws FileNotFoundException, IOException {
-		boolean encrypt;
-		PrintWriter printWriter;
-		printWriter = getPrintWriter(name, "DEC");
-		encrypt = false;
-		
-		String first100Letters;
-
-		for (int i = 0; i < 26; i++)
-		{
-			String newStr = caesar_cipher(name, encrypt, i);
-			first100Letters = newStr.substring(0, 100);
-			System.out.println(first100Letters);
-			System.out.println("Does this look right? ");
-			String answer2 = input.nextLine();
-			if (answer2.equals("Yes") || answer2.equals("yes"))
-			{
-				i = 26;
-				System.out.println("Result written to " + printWriter);
-				printWriter.print(newStr);
-				printWriter.close();
-			}
-		}
-	}
-
-	private static void decrypt(Scanner input, String name) throws FileNotFoundException, IOException {
-		char[] perm;
-		int shift;
-		boolean encrypt;
-		PrintWriter printWriter;
-		printWriter = getPrintWriter(name, "DEC");
-		
-		encrypt = false;
-		System.out.println("What algorithm, 'c' for Caesar cipher or 'p' for permutation? ");
-		char algorithm = input.next().charAt(0);
-		if (algorithm == 'p')
-		{
-			System.out.println("Enter permutation of alphabet to use during decryption ");
-			String permutedAlphabet = input.next();
-			perm = permutedAlphabet.toCharArray();
-			String newStr = perm_cipher(name, encrypt, perm);
-			System.out.println("Result written to " + printWriter);
-			printWriter.print(newStr);
-			printWriter.close();
-		}
-		else if (algorithm == 'c')
-		{
-			System.out.println("How many places should the alphabet be shifted? ");
-			shift = input.nextInt();
-			String newStr = caesar_cipher(name, encrypt, shift);
-			System.out.println("Result written to " + printWriter);
-			printWriter.print(newStr);
-			printWriter.close();
-		}
-	}
-
+	
+	//Encrypt File Method
 	private static void encrypt(Scanner input, String name)
 			throws FileNotFoundException, IOException {
 		int shift;
@@ -133,7 +78,66 @@ public class AnotherEncryptionAlgorithm {
 			printWriter.close();
 		}
 	}
+		
+	//Decrypt File Method
+	private static void decrypt(Scanner input, String name) throws FileNotFoundException, IOException {
+		char[] perm;
+		int shift;
+		boolean encrypt;
+		PrintWriter printWriter;
+		printWriter = getPrintWriter(name, "DEC");
+			
+		encrypt = false;
+		System.out.println("What algorithm, 'c' for Caesar cipher or 'p' for permutation? ");
+		char algorithm = input.next().charAt(0);
+		if (algorithm == 'p')
+		{
+			System.out.println("Enter permutation of alphabet to use during decryption ");
+			String permutedAlphabet = input.next();
+			perm = permutedAlphabet.toCharArray();
+			String newStr = perm_cipher(name, encrypt, perm);
+			System.out.println("Result written to " + printWriter);
+			printWriter.print(newStr);
+			printWriter.close();
+		}
+		else if (algorithm == 'c')
+		{
+			System.out.println("How many places should the alphabet be shifted? ");
+			shift = input.nextInt();
+			String newStr = caesar_cipher(name, encrypt, shift);
+			System.out.println("Result written to " + printWriter);
+			printWriter.print(newStr);
+			printWriter.close();
+		}
+	}
+		
+	//Crack File Method
+	private static void crack(Scanner input, String name) throws FileNotFoundException, IOException {
+		boolean encrypt;
+		PrintWriter printWriter;
+		printWriter = getPrintWriter(name, "DEC");
+		encrypt = false;
+		
+		String first100Letters;
 
+		for (int i = 0; i < 26; i++)
+		{
+			String newStr = caesar_cipher(name, encrypt, i);
+			first100Letters = newStr.substring(0, 100);
+			System.out.println(first100Letters);
+			System.out.println("Does this look right? ");
+			String answer2 = input.nextLine();
+			if (answer2.equals("Yes") || answer2.equals("yes"))
+			{
+				i = 26;
+				System.out.println("Result written to " + printWriter);
+				printWriter.print(newStr);
+				printWriter.close();
+			}
+		}
+	}
+
+	//getPrintWriter Method
 	private static PrintWriter getPrintWriter(String inputName, String functionName) throws FileNotFoundException {
 		int locate = inputName.indexOf(".");
 		String newName = inputName.substring(0, locate);
@@ -198,14 +202,17 @@ public class AnotherEncryptionAlgorithm {
 	    }	
 		return newStr;
 	}
+	
 	private static boolean isLower(char c)
 	{
 		return c >= 'a' && c <= 'z';
 	}
+	
 	private static boolean isUpper(char c)
 	{
 		return c >= 'A' && c <= 'Z';
 	}
+	
 	private static String upperCaseEncryptor(String newStr, char letter, int shiftAmount) {
 		int number = letter - 'A';
 		number = (number - shiftAmount) % 26;
@@ -217,6 +224,7 @@ public class AnotherEncryptionAlgorithm {
 		newStr += letter;
 		return newStr;
 	}
+	
 	private static String lowerCaseEncryptor(String newStr, char letter, int shiftAmount) {
 		int number = letter - 'a';
 		number = (number - shiftAmount) % 26;
@@ -228,6 +236,7 @@ public class AnotherEncryptionAlgorithm {
 		newStr += letter;
 		return newStr;
 	}
+	
 	private static String upperCaseDecryptor(String newStr, char letter, int shiftAmount) {
 		int number = letter - 'A';
 		number = (number - shiftAmount) % 26;
@@ -239,6 +248,7 @@ public class AnotherEncryptionAlgorithm {
 		newStr += letter;
 		return newStr;
 	}
+	
 	private static String lowerCaseDecryptor(String newStr, char letter, int shiftAmount) {
 		int number = letter - 'a';
 		number = (number - shiftAmount) % 26;
