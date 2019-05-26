@@ -28,16 +28,8 @@ public class Part_III {
 			System.out.println("How many places should the alphabet be shifted? ");
 			shift = input.nextInt();
 			String newStr = caesar_cipher(name, encrypt, shift);
-			for (int i = 0; i < newStr.length(); i ++)
-			{
-				String spaceString = Character.toString(newStr.charAt(i));
-				if (spaceString.equals("\n"))
-				{
-					printWriter.println();
-				}
-				printWriter.print(newStr.charAt(i));
-			}
-			System.out.println("New String in encrypted/decrypted file: " + newStr);
+			System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
+			printWriter.print(newStr);
 			printWriter.close();
 		}
 		else if (answer.equals("Decrypt") || answer.equals("decrypt"))
@@ -46,16 +38,8 @@ public class Part_III {
 			System.out.println("How many places should the alphabet be shifted? ");
 			shift = input.nextInt();
 			String newStr = caesar_cipher(name, encrypt, shift);
-			for (int i = 0; i < newStr.length(); i ++)
-			{
-				String spaceString = Character.toString(newStr.charAt(i));
-				if (spaceString.equals("\n"))
-				{
-					printWriter.println();
-				}
-				printWriter.print(newStr.charAt(i));
-			}
-			System.out.println("New String in encrypted/decrypted file: " + newStr);
+			System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
+			printWriter.print(newStr);
 			printWriter.close();
 		}
 		else if (answer.equals("Crack") || answer.equals("crack"))
@@ -64,7 +48,7 @@ public class Part_III {
 			
 			String first100Letters;
 
-			for (int i =0; i < 26; i++)
+			for (int i = 0; i < 26; i++)
 			{
 				String newStr = caesar_cipher(name, encrypt, 19);
 				first100Letters = newStr.substring(0, 100);
@@ -74,16 +58,8 @@ public class Part_III {
 				if (answer2.equals("Yes") || answer2.equals("yes"))
 				{
 					i = 26;
-					for (int j = 0; j < newStr.length(); j++)
-					{
-						String spaceString = Character.toString(newStr.charAt(j));	
-						if(spaceString.equals("\n"))
-						{
-							printWriter.println();
-						}
-						printWriter.print(newStr.charAt(j));						
-					}
-					System.out.println("New String in encrypted/decrypted file: " + newStr);
+					System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
+					printWriter.print(newStr);
 					printWriter.close();
 				}
 			}
@@ -98,12 +74,13 @@ public class Part_III {
 	{
 		File myFile = new File(fileName);
 		Scanner inputFile = new Scanner(myFile);
-	    
 	    String newStr = "";
-	    
+	    if (!encrypt)
+	    	shiftAmount *= -1;
 	    while (inputFile.hasNext())
 	    {
 	    	String str = inputFile.nextLine();
+	    	
 	    	if (encrypt) //encrypting
 			{
 				for(int i = 0; i < str.length(); i++)
@@ -123,10 +100,10 @@ public class Part_III {
 						newStr += letter;
 					}
 				}	
+				newStr += "\n";
 			}
 	    	else  //decrypting
-			{
-				shiftAmount *= -1;
+			{	    		
 				for(int i = 0; i < str.length(); i++)
 				{
 					char letter = str.charAt(i);	
@@ -144,6 +121,7 @@ public class Part_III {
 						newStr += letter;
 					}
 				}
+				newStr += "\n";
 			}
 	    }	
 		return newStr;
