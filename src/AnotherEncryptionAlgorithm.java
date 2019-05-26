@@ -18,7 +18,7 @@ public class AnotherEncryptionAlgorithm {
 	    String answer = input.nextLine();
 	    MainFunction(input, name, answer);
 	}
-
+	//Establishing permuted alphabet
 	private static char[] getPerm() {
 		char[] perm = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 		Random rand = new Random();
@@ -31,7 +31,8 @@ public class AnotherEncryptionAlgorithm {
 		}
 		return perm;
 	}
-
+	
+	//
 	private static void MainFunction( Scanner input, String name,  String answer)
 			throws FileNotFoundException, IOException {
 		 
@@ -44,7 +45,7 @@ public class AnotherEncryptionAlgorithm {
 		{
 	    	decrypt(input, name);
 		}
-	    else if (answer.equals("Crack") || answer.equals("crack"))
+	    else if (answer.equalsIgnoreCase("crack"))
 		{
 	    	crack(input, name);
 		}
@@ -68,7 +69,7 @@ public class AnotherEncryptionAlgorithm {
 			if (answer2.equals("Yes") || answer2.equals("yes"))
 			{
 				i = 26;
-				System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
+				System.out.println("Result written to " + printWriter);
 				printWriter.print(newStr);
 				printWriter.close();
 			}
@@ -91,7 +92,7 @@ public class AnotherEncryptionAlgorithm {
 			String permutedAlphabet = input.next();
 			perm = permutedAlphabet.toCharArray();
 			String newStr = perm_cipher(name, encrypt, perm);
-			System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
+			System.out.println("Result written to " + printWriter);
 			printWriter.print(newStr);
 			printWriter.close();
 		}
@@ -100,7 +101,7 @@ public class AnotherEncryptionAlgorithm {
 			System.out.println("How many places should the alphabet be shifted? ");
 			shift = input.nextInt();
 			String newStr = caesar_cipher(name, encrypt, shift);
-			System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
+			System.out.println("Result written to " + printWriter);
 			printWriter.print(newStr);
 			printWriter.close();
 		}
@@ -118,7 +119,7 @@ public class AnotherEncryptionAlgorithm {
 			char[] perm = getPerm();
 			System.out.println("The folloiwng permuted alphabet will be used for encryption: " + Arrays.toString(perm));
 			String newStr = perm_cipher(name, true, perm);
-			System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
+			System.out.println("Result written to " + printWriter);
 			printWriter.print(newStr);
 			printWriter.close();
 		}
@@ -127,7 +128,7 @@ public class AnotherEncryptionAlgorithm {
 			System.out.println("How many places should the alphabet be shifted? ");
 			shift = input.nextInt();
 			String newStr = caesar_cipher(name, true, shift);
-			System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
+			System.out.println("Result written to " + printWriter);
 			printWriter.print(newStr);
 			printWriter.close();
 		}
