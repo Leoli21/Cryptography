@@ -32,13 +32,21 @@ public class AnotherEncryptionAlgorithm {
 		return perm;
 	}
 	
+	//getPrintWriter Method
+	private static PrintWriter getPrintWriter(String inputName, String functionName) throws FileNotFoundException
+	{
+		int locate = inputName.indexOf(".");
+		String newName = inputName.substring(0, locate);
+	    PrintWriter printWriter = new PrintWriter(newName + "_"+ functionName + ".txt");
+		return printWriter;
+	}
+	
 	//Encrypt, Decrypt, or Crack a File 
 	private static void MainFunction(Scanner input, String name, String answer)
 			throws FileNotFoundException, IOException 
 	{	 
 		if(answer.equalsIgnoreCase("encrypt"))
-	    {
-	    	
+	    {    	
 	    	encrypt(input, name);
 	    }
 	    else if (answer.equalsIgnoreCase("decrypt"))
@@ -50,7 +58,7 @@ public class AnotherEncryptionAlgorithm {
 	    	crack(input, name);
 		}
 	}
-	
+			
 	//Encrypt File Method
 	private static void encrypt(Scanner input, String name)
 			throws FileNotFoundException, IOException {
@@ -64,7 +72,7 @@ public class AnotherEncryptionAlgorithm {
 			char[] perm = getPerm();
 			System.out.println("The folloiwng permuted alphabet will be used for encryption: " + Arrays.toString(perm));
 			String newStr = perm_cipher(name, true, perm);
-			System.out.println("Result written to " + printWriter);
+			System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
 			printWriter.print(newStr);
 			printWriter.close();
 		}
@@ -73,7 +81,7 @@ public class AnotherEncryptionAlgorithm {
 			System.out.println("How many places should the alphabet be shifted? ");
 			shift = input.nextInt();
 			String newStr = caesar_cipher(name, true, shift);
-			System.out.println("Result written to " + printWriter);
+			System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
 			printWriter.print(newStr);
 			printWriter.close();
 		}
@@ -96,7 +104,7 @@ public class AnotherEncryptionAlgorithm {
 			String permutedAlphabet = input.next();
 			perm = permutedAlphabet.toCharArray();
 			String newStr = perm_cipher(name, encrypt, perm);
-			System.out.println("Result written to " + printWriter);
+			System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
 			printWriter.print(newStr);
 			printWriter.close();
 		}
@@ -105,7 +113,7 @@ public class AnotherEncryptionAlgorithm {
 			System.out.println("How many places should the alphabet be shifted? ");
 			shift = input.nextInt();
 			String newStr = caesar_cipher(name, encrypt, shift);
-			System.out.println("Result written to " + printWriter);
+			System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
 			printWriter.print(newStr);
 			printWriter.close();
 		}
@@ -130,21 +138,13 @@ public class AnotherEncryptionAlgorithm {
 			if (answer2.equals("Yes") || answer2.equals("yes"))
 			{
 				i = 26;
-				System.out.println("Result written to " + printWriter);
+				System.out.println("New String in encrypted/decrypted file: " + "\n" + newStr);
 				printWriter.print(newStr);
 				printWriter.close();
 			}
 		}
 	}
-
-	//getPrintWriter Method
-	private static PrintWriter getPrintWriter(String inputName, String functionName) throws FileNotFoundException {
-		int locate = inputName.indexOf(".");
-		String newName = inputName.substring(0, locate);
-	    PrintWriter printWriter = new PrintWriter(newName + "_"+ functionName + ".txt");
-		return printWriter;
-	}
-	
+		
 	//Caesar Cipher Method
 	public static String caesar_cipher(String fileName, boolean encrypt, int shiftAmount) throws IOException
 	{
